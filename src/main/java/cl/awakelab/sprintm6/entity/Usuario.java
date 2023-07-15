@@ -1,10 +1,10 @@
 package cl.awakelab.sprintm6.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -32,6 +32,7 @@ public class Usuario {
     @Column(name = "apellido_2", length = 100)
     private String apellido2;
 
+    @JsonIgnore
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_perfil")
     private Perfil perfil;
@@ -43,7 +44,7 @@ public class Usuario {
     private LocalDate fechaCreacion;
 
     @Column
-    private int telefono;
+    private Long telefono;
 
     //Relacion con Empleador
     @OneToMany(mappedBy = "usuario")

@@ -20,6 +20,7 @@ public class Perfil {
     @Column(nullable = false)
     private boolean estado;
 
-    @OneToMany(mappedBy = "idUsuario")
+    // Relacion con Usuario
+    @OneToMany(mappedBy = "perfil")
     private List<Usuario> listaUsuarios;
 }
