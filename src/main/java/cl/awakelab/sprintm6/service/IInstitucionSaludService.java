@@ -12,7 +12,7 @@ public interface IInstitucionSaludService {
 
     // buscar por id no tiene utilidad al ser un solo elemento
 
-    InstitucionSalud actualizarInstitucionSalud(InstitucionSalud InstSalud);
+    InstitucionSalud actualizarInstitucionSalud(InstitucionSalud instSaludActualizar);
 
     // no puede eliminar
 }

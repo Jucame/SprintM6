@@ -12,7 +12,7 @@ public interface IInstitucionPrevisionService {
 
     InstitucionPrevision buscarInstPrevisionalPorId(int idInstPrevisional);
 
-    InstitucionPrevision actualizarInstitucionPrevisional(InstitucionPrevision instPrevisional);
+    InstitucionPrevision actualizarInstitucionPrevisional(InstitucionPrevision instPrevisionalActualizar);
 
     // No puede eliminar?
 }

@@ -14,5 +14,5 @@ public interface IEmpleadorService {
 
     Empleador actualizarEmpleador(Empleador empleadorActualizar);
 
-    void eliminarEmpleadorPorId(int Empleador);
+    void eliminarEmpleadorPorId(int idEmpleador);
 }
