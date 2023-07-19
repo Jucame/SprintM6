@@ -4,6 +4,7 @@ import cl.awakelab.sprintm6.entity.Usuario;
 import cl.awakelab.sprintm6.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +16,21 @@ public class UsuarioController {
     @Autowired
     IUsuarioService objUsuarioService;
 
-    @PostMapping // para guardar info
-    public Usuario crearUsuario(@RequestBody Usuario usuario) {
-        return objUsuarioService.crearUsuario(usuario);
+    @GetMapping("/registro")
+    public String registro(Model model) {
+        return "registro";
+    }
+
+    @PostMapping("/SignIn") // <- para diferenciar respecto a entrada
+    public String registrado(@ModelAttribute Usuario nuevoUsuario) {
+        objUsuarioService.crearUsuario(nuevoUsuario);
+        return "redirect:/login";
+    }
+
+    @PostMapping("/crear")
+    public String crearUsuario(@ModelAttribute Usuario usuario) {
+        objUsuarioService.crearUsuario(usuario);
+        return "home"; //TODO Cambiar a listarUsuario cuando esté lista
     }
 
     @GetMapping("/{idUsuario}")
@@ -25,12 +38,12 @@ public class UsuarioController {
         return objUsuarioService.buscarUsuarioPorId(idUsuario);
     }
 
-    @GetMapping
+
     public List<Usuario> listarUsuario() {
         return objUsuarioService.listarUsuarios();
     }
 
-    @PutMapping
+
     public Usuario actualizarUsuario(Usuario usuarioActualizar) {
         return objUsuarioService.actualizarUsuario(usuarioActualizar);
     }
@@ -39,4 +52,6 @@ public class UsuarioController {
     public void eliminarUsuario(@PathVariable int idUsuario) {
         objUsuarioService.eliminarUsuarioPorId(idUsuario);
     }
+
+
 }

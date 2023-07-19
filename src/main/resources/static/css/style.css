@@ -1,0 +1,44 @@
+#tituloObjetivo {
+    padding: 25px;
+}
+
+h2 {
+    text-align: center;
+}
+
+#caracteristicas {
+    padding: 0px 25px 50px 50px;
+}
+
+#tituloCaracteristicas {
+    padding: 20px;
+}
+
+#contactoHome {
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+#contactoContenido {
+    justify-content: center;
+}
+
+#contactoTitulo {
+    margin-bottom: 70px;
+}
+
+#contactoForm {
+    justify-content: left;
+}
+
+#divfooter {
+    text-align: center;
+}
+
+#formLogin {
+    justify-content: center;
+}
+
+#claveHelper {
+    text-align: right;
+}
