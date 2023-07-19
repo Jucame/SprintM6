@@ -11,54 +11,58 @@
     <body class="container">
         <!-- NavBar postlogin -->
         <header class="container bg-warning" th:insert="~{../static/html/postloginheader.html}"></header>
-        <div class="container justify-content-center mt-4">
-            <h2 class="mb-4">Bienvenido {nombre usuario}</h2>
-            <h4 class="mb-3">¿Qué deseas hacer?</h4>
+        <div class="container justify-content-center my-4">
+            <h2 class="mb-4 text-center">Bienvenido {nombre usuario}</h2>
+            <h4 class="mb-4 text-center">¿Qué deseas hacer?</h4>
         </div>
 
-        <div class="container text-center">
-            <div class="row row-cols-4 row-cols-lg-4 g-3 g-lg-3">
-                <a href="">
+        <div class="container text-center mb-5">
+            <div class="row row-cols-4 row-cols-lg-4 g-4 gy-4 g-lg-4">
+                <a href="" class="text-white link-underline link-underline-opacity-0">
                     <div class="col bg-dark">
-                        <div class="p-3">Crear Usuario</div>
+                        <div class="p-3">Crear <br> Usuario</div>
                     </div>
                 </a>
-                <a href="" class="text-white bg-dark link-underline link-underline-opacity-0">
-                    <div class="col">
-                        <div class="p-3">Crear Empleador</div>
+                <a href="" class="text-white link-underline link-underline-opacity-0">
+                    <div class="col bg-dark">
+                        <div class="p-3">Crear <br> Empleador</div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="col">
-                        <div class="p-3">Crear Trabajador</div>
+                <a href="" class="text-white link-underline link-underline-opacity-0">
+                    <div class="col bg-dark">
+                        <div class="p-3">Crear <br> Trabajador</div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="col">
-                        <div class="p-3">Crear Liquidación</div>
+                <a href="" class="text-white link-underline link-underline-opacity-0">
+                    <div class="col bg-dark">
+                        <div class="p-3">Crear <br> Liquidación</div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="col">
-                        <div class="p-3">Ver y/o editar usuarios</div>
+                <a href="" class="text-white link-underline link-underline-opacity-0">
+                    <div class="col bg-dark">
+                        <div class="p-3">Ver y/o editar <br> Usuarios</div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="col">
-                        <div class="p-3">Ver y/o editar empleador</div>
+                <a href="" class="text-white link-underline link-underline-opacity-0">
+                    <div class="col bg-dark">
+                        <div class="p-3">Ver y/o editar <br> Empleadores</div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="col">
-                        <div class="p-3">Ver y/o editar trabajador</div>
+                <a href="" class="text-white link-underline link-underline-opacity-0">
+                    <div class="col bg-dark">
+                        <div class="p-3">Ver y/o editar <br> Trabajadores</div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="col">
-                        <div class="p-3">Ver y/o editar liquidación</div>
+                <a href="" class="text-white link-underline link-underline-opacity-0">
+                    <div class="col bg-dark">
+                        <div class="p-3">Ver y/o editar <br> Liquidaciones</div>
                     </div>
                 </a>
             </div>
+        </div>
+
+        <div class="container mb-5 text-center">
+            <h4>Para agregar una nueva liquidación selecciona la opción <br> "Ver y/o editar Trabajadores"</h4>
         </div>
 
         <footer class="container bg-warning" th:insert="~{../static/html/footer.html}"></footer>
