@@ -40,7 +40,7 @@ public class UsuarioController {
         return "redirect:/usuario/listarUsuarios";
     }
 
-    @GetMapping("/{idUsuario}")
+    //@GetMapping("/{idUsuario}")
     public Usuario buscarUsuarioPorId(@PathVariable int idUsuario) {
         return objUsuarioService.buscarUsuarioPorId(idUsuario);
     }
@@ -51,9 +51,18 @@ public class UsuarioController {
         return "listarusuarios";
     }
 
+    @PostMapping("/editar/{idUsuario}")
+    public String editarUsuario(@PathVariable int idUsuario, Model model) {
+        Usuario usuarioActualizar = objUsuarioService.buscarUsuarioPorId(idUsuario);
+        model.addAttribute("usuarioActualizar", usuarioActualizar);
+        return "editarusuario";
+    }
 
-    public Usuario actualizarUsuario(Usuario usuarioActualizar) {
-        return objUsuarioService.actualizarUsuario(usuarioActualizar);
+    @PostMapping("/actualizar/{idUsuario}")
+    public String actualizarUsuario(@PathVariable int idUsuario, @ModelAttribute Usuario usuario) {
+        usuario.setIdUsuario(idUsuario);
+        objUsuarioService.actualizarUsuario(usuario);
+        return "redirect:/usuario/listarUsuarios";
     }
 
     @PostMapping("/eliminar/{idUsuario}")
