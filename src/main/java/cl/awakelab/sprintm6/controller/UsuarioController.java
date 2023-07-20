@@ -18,19 +18,26 @@ public class UsuarioController {
 
     @GetMapping("/registro")
     public String registro(Model model) {
+        model.addAttribute("titulo", "Registro");
         return "registro";
     }
 
-    @PostMapping("/SignIn") // <- para diferenciar respecto a entrada
+    @PostMapping("/registro") // <- para diferenciar respecto a entrada
     public String registrado(@ModelAttribute Usuario nuevoUsuario) {
         objUsuarioService.crearUsuario(nuevoUsuario);
         return "redirect:/login";
     }
 
+    @GetMapping("/crear")
+    public String crearUsuario(Model model) {
+        model.addAttribute("titulo", "Crear");
+        return "registro";
+    }
+
     @PostMapping("/crear")
     public String crearUsuario(@ModelAttribute Usuario usuario) {
         objUsuarioService.crearUsuario(usuario);
-        return "home"; //TODO Cambiar a listarUsuario cuando esté lista
+        return "redirect:/usuario/listarUsuarios";
     }
 
     @GetMapping("/{idUsuario}")

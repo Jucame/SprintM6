@@ -1,5 +1,6 @@
 <div id="divformRegistro" class="col-6">
-    <form method="post" id="formUsuario">
+    <form th:action="@{/usuario/__${titulo == 'Registro' ? 'registro' : 'crear'}__}" method="post" id="formUsuario">
+        <h2 th:text="${titulo + ' Usuario'}"></h2>
         <div class="mb-3">
             <label for="inputRegRun" class="form-label">RUN</label>
             <input type="text" class="form-control" id="inputRegRun" name="run">
@@ -37,6 +38,9 @@
             <label class="form-check-label" for="inputRegEmpleador">Empleador</label>
             <input class="form-check-input" type="radio" id="inputRegContador" name="perfil.idPerfil" th:value="2">
             <label class="form-check-label" for="inputRegContador">Contador</label>
+        </div>
+        <div class="container d-flex justify-content-center">
+            <button class="btn btn-dark col-6 mb-5" type="submit">Registrar</button>
         </div>
     </form>
 </div>

@@ -17,7 +17,7 @@ public class LoginController {
 
     @PostMapping("/bienvenida")
     public String logedin() {
-        // Variables temporales hasta aprender security
+        //temporales hasta aprender security
         return "bienvenida";
     }
 
