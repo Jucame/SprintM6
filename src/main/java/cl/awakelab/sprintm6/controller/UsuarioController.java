@@ -38,9 +38,10 @@ public class UsuarioController {
         return objUsuarioService.buscarUsuarioPorId(idUsuario);
     }
 
-
-    public List<Usuario> listarUsuario() {
-        return objUsuarioService.listarUsuarios();
+    @GetMapping("/listarUsuarios")
+    public String listarUsuario(Model model) {
+        model.addAttribute("usuarios", objUsuarioService.listarUsuarios());
+        return "listarusuarios";
     }
 
 
@@ -48,9 +49,10 @@ public class UsuarioController {
         return objUsuarioService.actualizarUsuario(usuarioActualizar);
     }
 
-    @DeleteMapping("/{idUsuario}")
-    public void eliminarUsuario(@PathVariable int idUsuario) {
+    @PostMapping("/eliminar/{idUsuario}")
+    public String eliminarUsuario(@PathVariable int idUsuario) {
         objUsuarioService.eliminarUsuarioPorId(idUsuario);
+        return "redirect:/usuario/listarUsuarios";
     }
 
 
