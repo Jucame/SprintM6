@@ -1,5 +1,6 @@
 package cl.awakelab.sprintm6.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -33,12 +34,13 @@ public class Empleador {
     @Column(length = 100)
     private String email;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
     @Column
-    private int telefono;
+    private Integer telefono;
 
     //Relacion con Trabajador a traves de Empl_Trab
     @ManyToMany

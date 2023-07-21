@@ -34,13 +34,15 @@ public class EmpleadorImpl implements IEmpleadorService {
     @Override
     public Empleador actualizarEmpleador(Empleador empleadorActualizar) {
         // USA THIS EN VEZ DE CONSTRUIR NUEVAMENTE
-        Empleador empleador = this.buscarEmpleadorPorId(empleadorActualizar.getIdEmpleador());
+        Empleador empleador = objEmpleadorRepo.findById(empleadorActualizar.getIdEmpleador()).orElseThrow(()
+                -> new NoSuchElementException("Empleador no encontrado"));
 
         empleador.setNombre(empleadorActualizar.getNombre());
         empleador.setApellido1(empleadorActualizar.getApellido1());
         empleador.setApellido2(empleadorActualizar.getApellido2());
         empleador.setDireccion(empleadorActualizar.getEmail());
         empleador.setTelefono(empleadorActualizar.getTelefono());
+        empleador.setUsuario(empleadorActualizar.getUsuario());
 
         return objEmpleadorRepo.save(empleador);
     }
