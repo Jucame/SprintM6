@@ -4,6 +4,7 @@ import cl.awakelab.sprintm6.entity.Empleador;
 import cl.awakelab.sprintm6.entity.Perfil;
 import cl.awakelab.sprintm6.entity.Usuario;
 import cl.awakelab.sprintm6.service.IEmpleadorService;
+import cl.awakelab.sprintm6.service.IPerfilService;
 import cl.awakelab.sprintm6.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class EmpleadorController {
 
     @Autowired
     IUsuarioService objUsuarioService;
+
+    @Autowired
+    IPerfilService objPerfilService;
 
     @GetMapping("/listarEmpleadores")
     public String listarEmpleadores(Model model) {
@@ -50,12 +54,10 @@ public class EmpleadorController {
 
     @PostMapping("/actualizar/{idEmpleador}")
     public String actualizarEmpleador(@PathVariable int idEmpleador, @ModelAttribute Empleador empleador) {
-        Usuario usuario = new Usuario();
-        Perfil perfil = new Perfil();
-        perfil = usuario.getPerfil();
-        usuario = objUsuarioService.buscarUsuarioPorId(empleador.getUsuario().getIdUsuario());
-        usuario.setPerfil(perfil);
+        Usuario usuario = objUsuarioService.buscarUsuarioPorId(empleador.getUsuario().getIdUsuario());
         empleador.setUsuario(usuario);
+        Perfil perfil = objPerfilService.buscarPerfilPorId(usuario.getPerfil().getIdPerfil());
+        empleador.getUsuario().setPerfil(perfil);
         objEmpleadorService.actualizarEmpleador(empleador);
         return "redirect:/empleador/listarEmpleadores";
     }
