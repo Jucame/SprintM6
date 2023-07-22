@@ -16,7 +16,7 @@
         <div class="col-6">
             <form th:action="${titulo == 'Crear' ? '' : '/empleador/actualizar/' + empleadorActualizar.idEmpleador}" method="post">
                 <h2 th:text="${titulo + ' Empleador'}"></h2>
-                <div class="mb-3">
+                <div class="mb-3" th:if="${titulo == 'Editar'}">
                     <label for="inputid" class="form-label">ID</label>
                     <input type="text" class="form-control" id="inputid" name="idEmpleador" th:attr="value=${titulo == 'Crear'} ? null : ${empleadorActualizar.getIdEmpleador()}" disabled>
                 </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" name="email" th:attr="value=${titulo == 'Crear'} ? null : ${empleadorActualizar.getEmail()}">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Opcional" name="email" th:attr="value=${titulo == 'Crear'} ? null : ${empleadorActualizar.getEmail()}">
                 </div>
                 <div class="mb-3">
                     <label for="inputRegTel" class="form-label">Teléfono</label>
