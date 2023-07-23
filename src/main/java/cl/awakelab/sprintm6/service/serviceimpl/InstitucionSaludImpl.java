@@ -1,5 +1,6 @@
 package cl.awakelab.sprintm6.service.serviceimpl;
 
+import cl.awakelab.sprintm6.entity.InstitucionPrevision;
 import cl.awakelab.sprintm6.entity.InstitucionSalud;
 import cl.awakelab.sprintm6.repository.IInstitucionSaludRepository;
 import cl.awakelab.sprintm6.service.IInstitucionSaludService;
@@ -20,6 +21,11 @@ public class InstitucionSaludImpl implements IInstitucionSaludService {
         return objInstitucionSaludRepo.findAll();
     }
 
+    @Override
+    public InstitucionSalud buscarInstSaludPorId(int idInstPrevisional) {
+        return objInstitucionSaludRepo.findById(idInstPrevisional).orElseThrow(()
+                -> new NoSuchElementException("Institución salud no encontrada"));
+    }
     @Override
     public InstitucionSalud actualizarInstitucionSalud(InstitucionSalud instSaludActualizar) {
         InstitucionSalud instSalud = objInstitucionSaludRepo.findById(instSaludActualizar.getIdSalud()).orElseThrow(()

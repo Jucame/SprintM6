@@ -10,7 +10,7 @@ public interface IInstitucionSaludService {
 
     List<InstitucionSalud> listarInstitucionSalud();
 
-    // buscar por id no tiene utilidad al ser un solo elemento
+    InstitucionSalud buscarInstSaludPorId(int idInstSalud);
 
     InstitucionSalud actualizarInstitucionSalud(InstitucionSalud instSaludActualizar);
 

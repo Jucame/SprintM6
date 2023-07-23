@@ -3,6 +3,7 @@ package cl.awakelab.sprintm6.service.serviceimpl;
 import cl.awakelab.sprintm6.entity.Liquidacion;
 import cl.awakelab.sprintm6.repository.ILiquidacionRepository;
 import cl.awakelab.sprintm6.service.ILiquidacionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.NoSuchElementException;
 @Service("liquidacionImpl")
 public class LiquidacionImpl implements ILiquidacionService {
 
+    @Autowired
     ILiquidacionRepository objLiquidacionRepo;
 
     @Override

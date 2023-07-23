@@ -43,9 +43,9 @@ public class Empleador {
     private Integer telefono;
 
     //Relacion con Trabajador a traves de Empl_Trab
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Empl_Trab",
-    joinColumns = @JoinColumn(name = "id_empleador", nullable = false),
-    inverseJoinColumns = @JoinColumn(name = "id_trabajador", nullable = false))
+    joinColumns = @JoinColumn(name = "id_empleador", nullable = false, referencedColumnName = "id_empleador"),
+    inverseJoinColumns = @JoinColumn(name = "id_trabajador", nullable = false, referencedColumnName = "id_trabajador"))
     private List<Trabajador> listaTrabajador;
 }

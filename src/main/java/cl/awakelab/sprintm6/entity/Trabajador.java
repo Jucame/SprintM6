@@ -31,17 +31,17 @@ public class Trabajador {
     private String email;
 
     // Relacion con Institucion Prevision
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_inst_prevision")
     private InstitucionPrevision prevision;
 
     // Relacion con Institucion Salud
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_inst_salud")
     private InstitucionSalud salud;
 
     @Column(nullable = false)
-    private int telefono;
+    private Integer telefono;
 
     // Relacion con Empleador a traves de Empl_Trab
     @ManyToMany(mappedBy = "listaTrabajador")
@@ -50,4 +50,9 @@ public class Trabajador {
     // Relacion con Liquidacion
     @OneToMany(mappedBy = "trabajador")
     private List<Liquidacion> listaLiquidacion;
+
+    //Método para facilitar chequeo de empleadores
+    public boolean tieneEmpleadorConId(int idEmpleador) {
+        return listaEmpleador.stream().anyMatch(empleador -> empleador.getIdEmpleador() == idEmpleador);
+    }
 }
