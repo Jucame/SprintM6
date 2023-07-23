@@ -50,7 +50,7 @@ public class TrabajadorController {
         model.addAttribute("empleadores", objEmpleadorService.listarEmpleadores());
         model.addAttribute("trabajadorActualizar", trabajadorActualizar);
         model.addAttribute("institucionesSalud", objInstSaludService.listarInstitucionSalud());
-        model.addAttribute("institucionesPrevionales", objInstPrevisionService.listarInstitucionesPrevisionales());
+        model.addAttribute("institucionesPrevisionales", objInstPrevisionService.listarInstitucionesPrevisionales());
         model.addAttribute("titulo", "Editar");
         return "trabajador";
     }
@@ -67,7 +67,7 @@ public class TrabajadorController {
 
 
         // Usa persistencia de trabajador por mayor seguridad de los datos
-        Trabajador trabajadorGuardado = objTrabajadorService.buscarTrabajadorPorId(trabajador.getIdTrabajador());
+        Trabajador trabajadorGuardado = objTrabajadorService.buscarTrabajadorPorId(idTrabajador);
 
         // Lógica de seteo trabajador en lista de empleadores
         List<Empleador> listaEmpleadoresSeleccionadosInstanciados = new ArrayList<>();
@@ -76,7 +76,7 @@ public class TrabajadorController {
         try {
             for (Integer empleador : empleadoresSeleccionados) {
 
-                // Primero instancia cada empleador seleccionado por el trabajador
+                // Primero, instancia cada empleador seleccionado por el trabajador
                 Empleador emp = objEmpleadorService.buscarEmpleadorPorId(empleador);
 
                 // Segundo, determina si el empleador es nuevo o no
@@ -92,7 +92,7 @@ public class TrabajadorController {
         for (Empleador empEliminado : listaEmpleadoresEliminados) {
             empEliminado.getListaTrabajador().remove(trabajadorGuardado);
         }
-        //Finalmente actualiza todos los empleadores alterados
+        // Finalmente, actualiza todos los empleadores alterados
         for (Empleador empleadorAct : listaEmpleadoresSeleccionadosInstanciados) {
             objEmpleadorService.actualizarEmpleador(empleadorAct);
         }
@@ -113,7 +113,7 @@ public class TrabajadorController {
         model.addAttribute("titulo", "Crear");
         model.addAttribute("empleadores", objEmpleadorService.listarEmpleadores());
         model.addAttribute("institucionesSalud", objInstSaludService.listarInstitucionSalud());
-        model.addAttribute("institucionesPrevionales", objInstPrevisionService.listarInstitucionesPrevisionales());
+        model.addAttribute("institucionesPrevisionales", objInstPrevisionService.listarInstitucionesPrevisionales());
         return "trabajador";
     }
 

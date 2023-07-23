@@ -65,7 +65,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-seconday" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <button type="button" class="btn btn-primary">Guardar</button>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                     th:selected="${titulo == 'Crear'}">
                                 Selecciona una Institución Previsional o AFP
                             </option>
-                            <option th:each="instPrev : ${institucionesPrevionales}"
+                            <option th:each="instPrev : ${institucionesPrevisionales}"
                                     th:value="${instPrev.getIdPrevision()}"
                                     th:text="${instPrev.getDescripcion()}"
                                     th:selected="${titulo == 'Editar' and instPrev.getIdPrevision() == trabajadorActualizar.getPrevision().getIdPrevision()}">
