@@ -16,12 +16,12 @@ public class Liquidacion {
     private int idLiquidacion;
 
     // Relacion con Trabajador
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_trabajador")
     private Trabajador trabajador;
 
     @Column(nullable = false)
-    private LocalDate periodo;
+    private LocalDate periodo; // Se considerará como fecha de emisión o pago
 
     @Column(name = "sueldo_imponible", nullable = false)
     private int sueldoImponible;
@@ -30,7 +30,7 @@ public class Liquidacion {
     private int sueldoLiquido;
 
     // Relacion con Institucion Salud
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_inst_salud")
     private InstitucionSalud institucionSalud;
 
@@ -38,7 +38,7 @@ public class Liquidacion {
     private int montoInstSalud;
 
     // Relacion con Institucion Prevision
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_inst_previsional")
     private InstitucionPrevision institucionPrevision;
 
