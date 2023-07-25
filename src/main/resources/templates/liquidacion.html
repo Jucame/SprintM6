@@ -35,14 +35,16 @@
                                     th:text="${'ID:'+ trabajador.getIdTrabajador() + ' Nombre: ' + trabajador.getNombre()}"
                                     th:selected="${titulo == 'Editar' and trabajador.getIdTrabajador() == liquidacionActualizar.getTrabajador().getIdTrabajador()}"
                                     th:data-salud-id="${trabajador.getSalud().getIdSalud()}"
-                                    th:data-prevision-id="${trabajador.getPrevision().getIdPrevision()}">
+                                    th:data-salud-dcto="${trabajador.getSalud().getPorcentajeDcto()}"
+                                    th:data-prevision-id="${trabajador.getPrevision().getIdPrevision()}"
+                                    th:data-prevision-dcto="${trabajador.getPrevision().getPorcentajeDcto()}">
                             </option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="inputSueldoImponible" class="form-label">Sueldo Imponible</label>
                         <input type="number" class="form-control" id="inputSueldoImponible" name="sueldoImponible"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getSueldoImponible()}" required>
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getSueldoImponible()}" required disabled>
                     </div>
                     <!-- Select Inst Salud -->
                     <div class="mb-3">
@@ -63,7 +65,7 @@
                     <div class="mb-3">
                         <label for="inputMontoSalud" class="form-label">Monto Salud</label>
                         <input type="number" class="form-control" id="inputMontoSalud" name="montoInstSalud"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getMontoInstSalud()}" required>
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getMontoInstSalud()}" required disabled>
                     </div>
                     <!-- Select Instituciones Previsionales -->
                     <div class="mb-3">
@@ -84,27 +86,27 @@
                     <div class="mb-3">
                         <label for="inputMontoPrev" class="form-label">Monto AFP</label>
                         <input type="number" class="form-control" id="inputMontoPrev" name="montoInstPrevisional"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getMontoInstPrevisional()}" required>
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getMontoInstPrevisional()}" required disabled>
                     </div>
                     <div class="mb-3">
                         <label for="inputTotalDscto" class="form-label">Total Descuentos</label>
                         <input type="number" class="form-control" id="inputTotalDscto" name="totalDescuento"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getTotalDescuento()}" required>
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getTotalDescuento()}" required disabled>
                     </div>
                     <div class="mb-3">
                         <label for="inputTotalHaberes" class="form-label">Total Haberes</label>
                         <input type="number" class="form-control" id="inputTotalHaberes" name="totalHaberes"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getTotalHaberes()}" required>
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getTotalHaberes()}" required disabled>
                     </div>
                     <div class="mb-3">
                         <label for="inputAnticipo" class="form-label">Anticipo</label>
                         <input type="number" class="form-control" id="inputAnticipo" name="anticipo"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getAnticipo()}" required>
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getAnticipo()}" required disabled>
                     </div>
                     <div class="mb-3">
                         <label for="inputSueldoLiquido" class="form-label">Sueldo Líquido</label>
                         <input type="number" class="form-control" id="inputSueldoLiquido" name="sueldoLiquido"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getSueldoLiquido()}" required>
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getSueldoLiquido()}" required disabled>
                     </div>
                     <div class="mb-3">
                         <label for="inputPeriodo" class="form-label">Periodo</label>
@@ -124,26 +126,89 @@
         <!-- Script Bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         <script>
-            // Obtiene lista de trabajadores desde modelo de página
+
             function actualizarInstituciones() {
+
                 const selectTrabajador = document.getElementById("selectTrabajador");
                 const opcionTrabajador = selectTrabajador.options[selectTrabajador.selectedIndex];
-                // Accede a datos de instituciones del trabajador y actualiza selects de instituciones
+
+                // actualiza selects de instituciones
                 const selectSalud = document.getElementById("selectInstSalud");
                 selectSalud.value = opcionTrabajador.getAttribute("data-salud-id");
+
                 const selectPrevision = document.getElementById("SelectInstPrev");
                 selectPrevision.value = opcionTrabajador.getAttribute("data-prevision-id");
+
+                // activa input para sueldo imponible
+                const inputSImp = document.getElementById("inputSueldoImponible");
+                inputSImp.removeAttribute("disabled");
+            }
+
+            function actualizarValores() {
+                const valorSImp = parseInt(inputSImp.value);
+
+                // data Trabajador seleccionado
+                const selectTrabajador = document.getElementById("selectTrabajador");
+                const opcionTrabajador = selectTrabajador.options[selectTrabajador.selectedIndex];
+
+                // define porcentajes a multiplicar
+                const porcentajeSalud = parseFloat(opcionTrabajador.getAttribute("data-salud-dcto")) / 100;
+                const porcentajePrevision =parseFloat(opcionTrabajador.getAttribute("data-prevision-dcto")) / 100;
+
+                // calcula montos a setear
+                const resultadoMontoSalud = (valorSImp * porcentajeSalud).toFixed(0);
+                const resultadoMontoPrev = (valorSImp * porcentajePrevision).toFixed(0);
+
+                // setea resultados montos instituciones
+                const inputMontoSalud = document.getElementById("inputMontoSalud");
+                inputMontoSalud.value = resultadoMontoSalud;
+                const inputMontoPrev = document.getElementById("inputMontoPrev");
+                inputMontoPrev.value = resultadoMontoPrev;
+
+                // setea total descuentos con suma de resultados montos
+                const inputTotalDscto = document.getElementById("inputTotalDscto");
+                const resultadoTD = parseInt(resultadoMontoSalud) + parseInt(resultadoMontoPrev);
+                inputTotalDscto.value = resultadoTD;
+
+                // setea total haberes = valorSImp
+                const inputTotalHab = document.getElementById("inputTotalHaberes");
+                inputTotalHab.value = valorSImp;
+
+                // setea sueldo liquido restando total haberes - totaldctos - anticipo
+                const inputAnticipo = document.getElementById("inputAnticipo");
+                let valorAnticipo = parseInt(inputAnticipo.value);
+                if (!valorAnticipo) {
+                    valorAnticipo = 0;
+                    inputAnticipo.value = 0;
+                }
+                inputAnticipo.removeAttribute("disabled");
+                const montoSLiq = valorSImp - resultadoTD - valorAnticipo;
+                const inputSLiq = document.getElementById("inputSueldoLiquido");
+                inputSLiq.value = montoSLiq;
             }
 
             const selectTrabajador = document.getElementById("selectTrabajador");
             selectTrabajador.addEventListener("change", function () {
                 actualizarInstituciones();
             });
-
             const initialTrabajadorId = selectTrabajador.value;
             if (initialTrabajadorId) {
                 actualizarInstituciones();
             }
+
+            const inputSImp = document.getElementById("inputSueldoImponible");
+            inputSImp.addEventListener("change", function () {
+                actualizarValores();
+            })
+            const initialSueldoImp = inputSImp.value;
+            if (initialSueldoImp) {
+                actualizarValores();
+            }
+
+            const inputAnticipo = document.getElementById("inputAnticipo");
+            inputAnticipo.addEventListener("change", function () {
+                actualizarValores();
+            })
 
         </script>
     </body>
