@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,14 +18,14 @@
                     <h2 th:text="${titulo + ' Liquidación'}"></h2>
                     <div class="mb-3" th:if="${titulo == 'Editar'}">
                         <label for="inputIdLiq" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="inputIdLiq" name="idLiquidacion"
+                        <input type="number" class="form-control" id="inputIdLiq" name="idLiquidacion"
                                th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getIdLiquidacion()}" disabled>
                     </div>
                     <!-- Select Trabajador -->
                     <div class="mb-3">
                         <label for="selectTrabajador" class="form-label">Trabajador</label>
-                        <select class="form-select" name="trabajador.idTrabajador" id="selectTrabajador">
-                            <option value="0"
+                        <select class="form-select" name="trabajador.idTrabajador" id="selectTrabajador" required>
+                            <option value=""
                                     th:if="${titulo == 'Crear'}"
                                     th:selected="${titulo == 'Crear'}">
                                 Selecciona un Trabajador
@@ -33,20 +33,22 @@
                             <option th:each="trabajador : ${trabajadores}"
                                     th:value="${trabajador.getIdTrabajador()}"
                                     th:text="${'ID:'+ trabajador.getIdTrabajador() + ' Nombre: ' + trabajador.getNombre()}"
-                                    th:selected="${titulo == 'Editar' and trabajador.getIdTrabajador() == liquidacionActualizar.getTrabajador().getIdTrabajador()}">
+                                    th:selected="${titulo == 'Editar' and trabajador.getIdTrabajador() == liquidacionActualizar.getTrabajador().getIdTrabajador()}"
+                                    th:data-salud-id="${trabajador.getSalud().getIdSalud()}"
+                                    th:data-prevision-id="${trabajador.getPrevision().getIdPrevision()}">
                             </option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="inputSueldoImponible" class="form-label">Sueldo Imponible</label>
                         <input type="number" class="form-control" id="inputSueldoImponible" name="sueldoImponible"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getSueldoImponible()}">
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getSueldoImponible()}" required>
                     </div>
                     <!-- Select Inst Salud -->
                     <div class="mb-3">
                         <label for="selectInstSalud" class="form-label">Institución de Salud</label>
-                        <select class="form-select" name="institucionSalud.idSalud" id="selectInstSalud">
-                            <option value="0"
+                        <select class="form-select" name="institucionSalud.idSalud" id="selectInstSalud" required disabled>
+                            <option value=""
                                     th:if="${titulo == 'Crear'}"
                                     th:selected="${titulo == 'Crear'}">
                                 Selecciona una Institución de Salud
@@ -60,14 +62,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="inputMontoSalud" class="form-label">Monto Salud</label>
-                        <input type="text" class="form-control" id="inputMontoSalud" name="montoInstSalud"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getMontoInstSalud()}">
+                        <input type="number" class="form-control" id="inputMontoSalud" name="montoInstSalud"
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getMontoInstSalud()}" required>
                     </div>
                     <!-- Select Instituciones Previsionales -->
                     <div class="mb-3">
                         <label for="SelectInstPrev" class="form-label">AFP</label>
-                        <select class="form-select" name="institucionPrevision.idPrevision" id="SelectInstPrev">
-                            <option value="0"
+                        <select class="form-select" name="institucionPrevision.idPrevision" id="SelectInstPrev" required disabled>
+                            <option value=""
                                     th:if="${titulo == 'Crear'}"
                                     th:selected="${titulo == 'Crear'}">
                                 Selecciona una Institución Previsional o AFP
@@ -82,32 +84,32 @@
                     <div class="mb-3">
                         <label for="inputMontoPrev" class="form-label">Monto AFP</label>
                         <input type="number" class="form-control" id="inputMontoPrev" name="montoInstPrevisional"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getMontoInstPrevisional()}">
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getMontoInstPrevisional()}" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputTotalDscto" class="form-label">Total Descuentos</label>
                         <input type="number" class="form-control" id="inputTotalDscto" name="totalDescuento"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getTotalDescuento()}">
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getTotalDescuento()}" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputTotalHaberes" class="form-label">Total Haberes</label>
                         <input type="number" class="form-control" id="inputTotalHaberes" name="totalHaberes"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getTotalHaberes()}">
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getTotalHaberes()}" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputAnticipo" class="form-label">Anticipo</label>
                         <input type="number" class="form-control" id="inputAnticipo" name="anticipo"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getAnticipo()}">
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getAnticipo()}" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputSueldoLiquido" class="form-label">Sueldo Líquido</label>
                         <input type="number" class="form-control" id="inputSueldoLiquido" name="sueldoLiquido"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getSueldoLiquido()}">
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getSueldoLiquido()}" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputPeriodo" class="form-label">Periodo</label>
                         <input type="date" class="form-control" id="inputPeriodo" name="periodo"
-                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getPeriodo()}">
+                               th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getPeriodo()}" required>
                     </div>
                     <div class="container d-flex justify-content-center">
                         <button class="btn btn-outline-success col-6 mb-5"
@@ -121,5 +123,28 @@
 
         <!-- Script Bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script>
+            // Obtiene lista de trabajadores desde modelo de página
+            function actualizarInstituciones() {
+                const selectTrabajador = document.getElementById("selectTrabajador");
+                const opcionTrabajador = selectTrabajador.options[selectTrabajador.selectedIndex];
+                // Accede a datos de instituciones del trabajador y actualiza selects de instituciones
+                const selectSalud = document.getElementById("selectInstSalud");
+                selectSalud.value = opcionTrabajador.getAttribute("data-salud-id");
+                const selectPrevision = document.getElementById("SelectInstPrev");
+                selectPrevision.value = opcionTrabajador.getAttribute("data-prevision-id");
+            }
+
+            const selectTrabajador = document.getElementById("selectTrabajador");
+            selectTrabajador.addEventListener("change", function () {
+                actualizarInstituciones();
+            });
+
+            const initialTrabajadorId = selectTrabajador.value;
+            if (initialTrabajadorId) {
+                actualizarInstituciones();
+            }
+
+        </script>
     </body>
 </html>

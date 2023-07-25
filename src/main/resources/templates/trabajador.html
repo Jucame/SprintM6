@@ -18,23 +18,24 @@
                     <h2 th:text="${titulo + ' Trabajador'}"></h2>
                     <div class="mb-3" th:if="${titulo == 'Editar'}">
                         <label for="inputid" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="inputid" name="idTrabajador" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getIdTrabajador()}" disabled>
+                        <input type="number" class="form-control" id="inputid" name="idTrabajador" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getIdTrabajador()}" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="inputRun" class="form-label">RUN</label>
-                        <input type="text" class="form-control" id="inputRun" name="run" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getRun()}">
+                        <input type="number" class="form-control" id="inputRun" name="run" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getRun()}" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="inputNombre" name="nombre" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getNombre()}">
+                        <input type="text" class="form-control" id="inputNombre" name="nombre" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getNombre()}" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputAp1" class="form-label">Apellido 1</label>
-                        <input type="text" class="form-control" id="inputAp1" name="apellido1" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getApellido1()}">
+                        <input type="text" class="form-control" id="inputAp1" name="apellido1" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getApellido1()}" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputAp2" class="form-label">Apellido 2</label>
-                        <input type="text" class="form-control" id="inputAp2" placeholder="Opcional" name="apellido2" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getApellido2()}">
+                        <input type="text" class="form-control" id="inputAp2" placeholder="Opcional" name="apellido2"
+                               th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getApellido2()}">
                     </div>
                     <div class="mb-3">
                         <!-- Botón para invocar modal -->
@@ -65,8 +66,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">Guardar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
                                     </div>
                                 </div>
                             </div>
@@ -78,13 +78,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="inputRegTel" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" id="inputRegTel" name="telefono" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getTelefono()}">
+                        <input type="tel" class="form-control" id="inputRegTel" name="telefono" th:attr="value=${titulo == 'Crear'} ? null : ${trabajadorActualizar.getTelefono()}" required>
                     </div>
                     <!-- Select Institucion Salud -->
                     <div class="mb-3">
                         <label for="selectInstSalud" class="form-label">Institución de Salud</label>
-                        <select class="form-select" name="salud.idSalud" id="selectInstSalud">
-                            <option value="0"
+                        <select class="form-select" name="salud.idSalud" id="selectInstSalud" required>
+                            <option value=""
                                     th:if="${titulo == 'Crear'}"
                                     th:selected="${titulo == 'Crear'}">
                                 Selecciona una Institución de Salud
@@ -99,8 +99,8 @@
                     <!-- Select Instituciones Previsionales -->
                     <div class="mb-3">
                         <label for="selectInstPrev" class="form-label">AFP</label>
-                        <select class="form-select" name="prevision.idPrevision" id="selectInstPrev">
-                            <option value="0"
+                        <select class="form-select" name="prevision.idPrevision" id="selectInstPrev" required>
+                            <option value=""
                                     th:if="${titulo == 'Crear'}"
                                     th:selected="${titulo == 'Crear'}">
                                 Selecciona una Institución Previsional o AFP

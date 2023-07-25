@@ -3,15 +3,15 @@
         <h2 th:text="${titulo + ' Usuario'}"></h2>
         <div class="mb-3">
             <label for="inputRegRun" class="form-label">RUN</label>
-            <input type="text" class="form-control" id="inputRegRun" name="run">
+            <input type="number" class="form-control" id="inputRegRun" name="run" required>
         </div>
         <div class="mb-3">
             <label for="inputRegNombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="inputRegNombre" name="nombre">
+            <input type="text" class="form-control" id="inputRegNombre" name="nombre" required>
         </div>
         <div class="mb-3">
             <label for="inputRegAp1" class="form-label">Apellido 1</label>
-            <input type="text" class="form-control" id="inputRegAp1" name="apellido1">
+            <input type="text" class="form-control" id="inputRegAp1" name="apellido1" required>
         </div>
         <div class="mb-3">
             <label for="inputRegAp2" class="form-label">Apellido 2</label>
@@ -19,7 +19,7 @@
         </div>
         <div class="mb-3">
             <label for="inputRegEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputRegEmail" name="email">
+            <input type="email" class="form-control" id="inputRegEmail" name="email" required>
         </div>
         <div class="mb-3">
             <label for="inputRegFc" class="form-label">Fecha de Creación</label>
@@ -31,10 +31,10 @@
         </div>
         <div class="mb-3">
             <label for="inputRegClave" class="form-label">Clave</label>
-            <input type="password" class="form-control" id="inputRegClave" name="clave">
+            <input type="password" class="form-control" id="inputRegClave" name="clave" required>
         </div>
         <div class="container d-flex justify-content-center mb-3">
-            <input class="form-check-input" type="radio" id="inputRegEmpleador" name="perfil.idPerfil" th:value="3">
+            <input class="form-check-input" type="radio" id="inputRegEmpleador" name="perfil.idPerfil" th:value="3" required>
             <label class="form-check-label" for="inputRegEmpleador">Empleador</label>
             <input class="form-check-input" type="radio" id="inputRegContador" name="perfil.idPerfil" th:value="2">
             <label class="form-check-label" for="inputRegContador">Contador</label>
