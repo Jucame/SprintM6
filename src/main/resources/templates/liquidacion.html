@@ -14,7 +14,7 @@
 
         <main class="container d-flex justify-content-center">
             <div class="col-6">
-                <form th:action="${titulo == 'Crear' ? '' : '/liquidacion/actualizar/' + liquidacionActualizar.getIdLiquidacion()}" method="post">
+                <form th:action="${titulo == 'Crear' ? '' : '/liquidacion/actualizar/' + liquidacionActualizar.getIdLiquidacion()}" method="post" id="formLiquidacion">
                     <h2 th:text="${titulo + ' Liquidación'}"></h2>
                     <div class="mb-3" th:if="${titulo == 'Editar'}">
                         <label for="inputIdLiq" class="form-label">ID</label>
@@ -113,6 +113,13 @@
                         <input type="date" class="form-control" id="inputPeriodo" name="periodo"
                                th:attr="value=${titulo == 'Crear'} ? null : ${liquidacionActualizar.getPeriodo()}" required>
                     </div>
+
+                    <!-- CAMPOS OCULTOS PARA ENVÍO DE INFORMACION relevante para la creación y actualización-->
+                    <input type="hidden" name="institucionSalud.idSalud" id="idSalud"
+                           th:value="${titulo == 'Crear'} ? null : ${liquidacionActualizar.getInstitucionSalud().getIdSalud()}">
+                    <input type="hidden" name="institucionPrevision.idPrevision"  id="idPrev"
+                           th:value="${titulo == 'Crear'} ? null : ${liquidacionActualizar.getInstitucionPrevision().getIdPrevision()}">
+
                     <div class="container d-flex justify-content-center">
                         <button class="btn btn-outline-success col-6 mb-5"
                                 type="submit" th:text="${titulo == 'Crear'} ? 'Crear Liquidación' : 'Guardar Cambios'"></button>
@@ -135,9 +142,15 @@
                 // actualiza selects de instituciones
                 const selectSalud = document.getElementById("selectInstSalud");
                 selectSalud.value = opcionTrabajador.getAttribute("data-salud-id");
+                // añade seteo input que almacena info
+                const inputSalud = document.getElementById("idSalud");
+                inputSalud.value = opcionTrabajador.getAttribute("data-salud-id")
 
                 const selectPrevision = document.getElementById("SelectInstPrev");
                 selectPrevision.value = opcionTrabajador.getAttribute("data-prevision-id");
+                // añade seteo input que almacena info
+                const inputPrev = document.getElementById("idPrev");
+                inputPrev.value = opcionTrabajador.getAttribute("data-prevision-id");
 
                 // activa input para sueldo imponible
                 const inputSImp = document.getElementById("inputSueldoImponible");
